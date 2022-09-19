@@ -4,7 +4,6 @@ class ProductList{
         this.goods = [];
         this._fetchProducts();//рекомендация, чтобы метод был вызван в текущем классе
         this.render();//вывод товаров на страницу
-        //this.allProducts = [];
     }
 
     _fetchProducts(){
@@ -21,7 +20,6 @@ class ProductList{
         for(let product of this.goods){
             const item = new ProductItem(product);
             block.insertAdjacentHTML("beforeend",item.render());
-//              block.innerHTML += item.render();
         }
     }
 
