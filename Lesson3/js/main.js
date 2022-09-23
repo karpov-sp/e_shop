@@ -20,7 +20,7 @@ class ProductList {
             });
     }
 
-    render(){
+    render() {
         const block = document.querySelector(this.container);
         for(let product of this.goods){
             const productObj = new ProductItem(product);
@@ -28,21 +28,13 @@ class ProductList {
         }
     }
 
-    getSum(){
+    getSum() {
         let sum = 0;
-        // for (let=i in this.goods) {
-        //     sum += item[i].price;
-        // }
         this.goods.forEach(item => {
             sum += product.price;
         })
         alert(sum);
     }  
-
-    // calcSum() {
-    //     return this.allProducts.reduce((accum,item) => accum += item.price, 0);
-    //     alert(sum);
-    // }
 }
 
 class ProductItem {
@@ -52,6 +44,7 @@ class ProductItem {
         this.price = product.price;
         this.img = img;
     }
+
     render(){
            return `<div class="product-item">
                 <img src="${this.img}" alt="Some img">
@@ -62,10 +55,6 @@ class ProductItem {
     }
 }
 
-let list = new ProductList();
-//list.calcSum();
-list.getSum();
- 
 class Basket {
     constructor(container = '.cart-block') {
         this.container = container;
@@ -101,10 +90,7 @@ class Basket {
             document.querySelector(this.container).classList.toggle('invisible');
         });
     }
-
-    
 }
-
 class BasketItem {
 
     render(product,img='img/koala.jpg') {
@@ -125,6 +111,8 @@ class BasketItem {
     }
 }
 
+let list = new ProductList();
+list.getSum();
 let basket = new Basket();
 
 
