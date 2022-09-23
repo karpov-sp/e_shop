@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurator</title>
+</head>
+<body>
+    <form action="#" id="configurator-form">
+        <fieldset id="configurator-fieldset">
+            <h3 id="configurator-top">Сформируй свой заказ</h3>
+            <fieldset id="configurator-fieldset-inside">
+                <h4>Выбери параметр из первой группы:</h4>
+                <input type="radio" name="group1" id="big_size" value="Big" 
+                class="configurator-input" data-price="100" data-discount="10" checked>
+                <label for="big_size">Большой (100 рублей, 10%)</label><br>
+                <input type="radio" name="group1" id="small_size" value="Small" 
+                class="configurator-input" data-price="50" data-discount="5">
+                <label for="big_size">Малый (50 рублей, 5%)</label>
+            </fieldset>
+               
+            <fieldset id="configurator-fieldset-inside">
+                <h4>Выбери параметр из второй группы:</h4>
+                <input type="radio" name="group2" id="big_weight" value="Heavy" 
+                class="configurator-input" data-price="20" data-discount="0" checked>
+                <label for="big_size">Тяжелый (20 рублей, 0%)</label><br>
+                <input type="radio" name="group2" id="small_weight" value="Easy" 
+                class="configurator-input" data-price="50" data-discount="5">
+                <label for="big_size">Легкий (10 рублей, 5%)</label>
+            </fieldset>
+
+            <fieldset id="configurator-fieldset-inside">
+                <h4>Выбери дополнительную опцию:</h4>
+                <input type="checkbox" checked name="additional_properties" id="one" value="One_property" 
+                class="configurator-input" data-price="30" data-discount="0">
+                <label for="one">Первая доп.опция (20 рублей, 0%)</label><br>
+                <input type="checkbox" name="additional_properties" id="two" value="Two_property" 
+                class="configurator-input" data-price="25" data-discount="0">
+                <label for="two">Вторая доп.опция (10 рублей, 5%)</label>
+            </fieldset>
+
+            <button id="check">Сформировать заказ</button>
+
+            <p id="result">Итоговая стоимость: <span id="price">0</span><br>
+                Дисконт: <span id="discount">0</span></p>
+
+        </fieldset>
+
+</form>    
+<script src="configurator.js"></script>
+<script>
+    window.onload = () => {
+        document.getElementById("check").addEventListener('click', e => {
+            e.preventDefault();
+            let order = new Order('group1','group2','additional_properties');
+            console.log(order);
+            order.showSum("#price","#discount");
+        });
+    }
+</script>
+
+</body>
+</html>
