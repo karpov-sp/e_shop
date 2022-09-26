@@ -4,10 +4,16 @@ class ProductList {
     constructor(container = '.products'){
         this.container = container;
         this.goods = [];  //массив товаров из JSON-документа
+        // this.getSum() 
+        //     .then(price => {
+        //         this.goods = sum;
+        //      });
+
         this._getProducts()  // метод для получения каталога из JSON-документа
             .then(data => {  //data - объект JS
                 this.goods = data;
                 //console.log(data);
+                //this.getSum();
                 this.render()//вывод товаров на страницу
             });
     }
