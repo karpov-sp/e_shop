@@ -4,24 +4,29 @@ class ProductList {
     constructor(container = '.products'){
         this.container = container;
         this.goods = [];  //массив товаров из JSON-документа
+        // this.getSum() 
+        //     .then(price => {
+        //         this.goods = sum;
+        //      });
+
         this._getProducts()  // метод для получения каталога из JSON-документа
             .then(data => {  //data - объект JS
                 this.goods = data;
                 //console.log(data);
-                this.render();//вывод товаров на страницу
-            })
+                //this.getSum();
+                this.render()//вывод товаров на страницу
+            });
     }
 
     _getProducts() {
-
         return fetch('js/catalogData.json')  //возвращает промис
             .then(result => result.json())  //обработчик после промиса
             .catch(error => {
                 console.log(error);
-            })
+            });
     }
 
-    render(){
+    render() {
         const block = document.querySelector(this.container);
         for(let product of this.goods){
             const productObj = new ProductItem(product);
@@ -29,29 +34,26 @@ class ProductList {
         }
     }
 
-    getSum(){
+    getSum() {
         let sum = 0;
         this.goods.forEach(item => {
-             sum += item.price;
+            sum += product.price;
         })
         alert(sum);
-     }
-
-    // calcSum() {
-    //     return this.allProducts.reduce((accum,item) => accum += item.price, 0);
-    // }
+    }  
 }
 
 class ProductItem {
     constructor(product,img='img/koala.jpg'){
-        this.title = product.title;
-        this.id = product.id;
+        this.title = product.product_name;
+        this.id = product.id_product;
         this.price = product.price;
         this.img = img;
     }
+
     render(){
            return `<div class="product-item">
-                <img src="${this.img}">
+                <img src="${this.img}" alt="Some img">
                 <h3>${this.title}</h3>
                 <p>${this.price}</p>
                 <button class="buy-btn">Купить</button>
@@ -59,10 +61,6 @@ class ProductItem {
     }
 }
 
-let list = new ProductList();
-// list.calcSum();
-list.getSum();
- 
 class Basket {
     constructor(container = '.cart-block') {
         this.container = container;
@@ -73,21 +71,21 @@ class Basket {
             .then(data => {
                 this.goods = data.contents;
                 this.render();
-            });
+             });
     }
 
     _getBasketItem() {
         return fetch('js/getBasket.json')
-         .then(result => result.json())
-         .catch(error => {
-            console.log(error);
-         })
+        .then(result => result.json())
+        .catch(error => {
+             console.log(error);
+          })
     }
 
     render() {
         const block =document.querySelector(this.container);
         for (let product of this.goods) {
-            const productObj = new this._getBasketItem();
+            const productObj = new BasketItem();
 
             block.insertAdjacentHTML("beforeend", productObj.render(product));
         }
@@ -98,35 +96,30 @@ class Basket {
             document.querySelector(this.container).classList.toggle('invisible');
         });
     }
-
-    // addGood() {
-
-    // }
-
-    // changeGood() {
-
-    // }
-    
-    // removeGood() {
-
-    // }
-
-    // renderBasket(){
-
-    // }
 }
-
 class BasketItem {
-    // getBasketElSum(){
 
-    // }
-
-    render(product,img = 'img/koala.jpg') {
+    render(product,img='img/koala.jpg') {
         return `<div class="cart-item" data-id="${product.id_product}">
-            <img src="${img}" alt="Some image"></img>
-        </div>`
+                    <div class="product-bio">
+                        <img src="${img}" alt="Some image">
+                        <div class="product-desc">
+                            <p class="product-title">${product.product_name}</p>
+                            <p class="product-quantity">Quantity: ${product.quantity}</p>
+                            <p class="product-single-price">${product.price} each</p>
+                        </div>
+                    </div>
+                    <div class="right-block">
+                        <p class="product-price"> Стоимость заказа  ${product.quantity * product.price}</p>
+                        <button class="del-btn" data-id="${product.id_product}" title="удалить заказ"> X </button>
+                    </div>    
+                </div>`
     }
 }
+
+let list = new ProductList();
+list.getSum();
+let basket = new Basket();
 
 
 
