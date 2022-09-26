@@ -1,0 +1,30 @@
+input {
+    width: 200px;
+    padding: 5px 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+input:focus {
+    outline: none;
+}
+button {
+    border: none;
+    background: rgb(12, 172, 166);
+    color: white;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.error-msg {
+    color: red;
+    margin: 10px 0;
+}
+.invalid {
+    border: 2px solid red;
+    background-color: rgb(240, 174, 171);
+}
+.valid {
+    border: 2px solid green;
+    background-color: rgb(194, 219, 199);
+}
