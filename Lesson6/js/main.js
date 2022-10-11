@@ -6,6 +6,7 @@ const app = new Vue({
         catalogUrl: '/catalogData.json',
         products: [],
         filtered: [],
+        
         imgCatalog: 'https://via.placeholder.com/200x150',
         userSearch: '',
         cartUrl: '/getBasket.json',
